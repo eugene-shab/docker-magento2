@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  app:
+    volumes: &appvolumes
+      - ./src/nginx.conf.sample:/var/www/html/nginx.conf:cached
+      - ./src/app/code:/var/www/html/app/code
+      - ./src/app/etc:/var/www/html/app/etc:cached
+      - ./src/app/design:/var/www/html/app/design:cached
+      - ./src/vendor/magento:/var/www/html/vendor/magento
+      - ./src/composer.json:/var/www/html/composer.json:cached
+      - ./src/composer.lock:/var/www/html/composer.lock:cached
+      - ./src/var/log:/var/www/html/var/log:cached
+      - ./src/var/report:/var/www/html/var/report:cached
+
+  phpfpm:
+    volumes: *appvolumes
